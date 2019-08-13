@@ -10,6 +10,21 @@ namespace ExercicioCarro
     {
         static void Main(string[] args)
         {
+            try
+            {
+                Corsa c = new Corsa();
+                Corsa d = null;
+                 
+
+
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("Erro de execução");
+            }
+            finally {
+                Console.ReadKey();
+            }
         }
     }
 }
