@@ -23,8 +23,17 @@ namespace ExercicioCarro
                 Console.WriteLine("Erro de execução");
             }
             finally {
-                Console.ReadKey();
+               
             }
+
+            AbrirArquivo.LerArquivo();
+            AbrirArquivo.EditarArquivo();
+
+
+
+
+
+            Console.ReadKey();
         }
     }
 }
