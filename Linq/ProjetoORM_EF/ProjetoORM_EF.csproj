@@ -51,7 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Casa.cs" />
     <Compile Include="Cidade.cs" />
+    <Compile Include="Migrations\201908150038503_InitialCreate.cs" />
+    <Compile Include="Migrations\201908150038503_InitialCreate.Designer.cs">
+      <DependentUpon>201908150038503_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908192242480_version20190819.cs" />
+    <Compile Include="Migrations\201908192242480_version20190819.Designer.cs">
+      <DependentUpon>201908192242480_version20190819.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908200035317_casas.cs" />
+    <Compile Include="Migrations\201908200035317_casas.Designer.cs">
+      <DependentUpon>201908200035317_casas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelPessoas.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="Program.cs" />
@@ -60,6 +74,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201908150038503_InitialCreate.resx">
+      <DependentUpon>201908150038503_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908192242480_version20190819.resx">
+      <DependentUpon>201908192242480_version20190819.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908200035317_casas.resx">
+      <DependentUpon>201908200035317_casas.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

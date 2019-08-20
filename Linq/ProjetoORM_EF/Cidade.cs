@@ -14,5 +14,14 @@ namespace ProjetoORM_EF
         [Column("Nome_cidade")]
 
         public String Nome { get; set; }
+
+        [InverseProperty("Cidade")]
+
+        public IList<Pessoa> Moradores { get; set; }
+
+        [InverseProperty("LocaldeNascimento")]
+
+        public IList<Pessoa> PessoasNaturais { get; set; }
+
     }
 }

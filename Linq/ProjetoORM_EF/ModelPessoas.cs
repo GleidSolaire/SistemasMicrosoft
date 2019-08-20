@@ -22,6 +22,8 @@ namespace ProjetoORM_EF
 
          public virtual DbSet<Pessoa> Pessoas { get; set; }
         public virtual DbSet<Cidade> cidades { get; set; }
+
+        public virtual DbSet<Cidade> casas { get; set; }
     }
 
     //public class MyEntity
