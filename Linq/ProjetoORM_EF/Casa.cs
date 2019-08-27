@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace ProjetoORM_EF
 {
+    [Table("Casa")]
  public   class Casa
     {
 
+        [Key]
         public int id { get; set; }
         [InverseProperty("Casas")]
         public IList<Pessoa> Moradores { get; set; } = new List<Pessoa>();

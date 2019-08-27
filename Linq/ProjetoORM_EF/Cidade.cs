@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,11 @@ namespace ProjetoORM_EF
     {
         public int id { get; set; } 
 
+
+        [Required]
         [Column("Nome_cidade")]
 
+        [MaxLength(50, ErrorMessage = "Cidade deve ter no maximo 50 caracteres")]
         public String Nome { get; set; }
 
         [InverseProperty("Cidade")]

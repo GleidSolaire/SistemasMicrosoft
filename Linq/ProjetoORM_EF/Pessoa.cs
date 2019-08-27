@@ -13,11 +13,29 @@ namespace ProjetoORM_EF
         public String nome { get; set; }
         public DateTime nascimento { get; set; }
 
+        public String documento;
+
+        public int telefone;
+
         public Cidade cidade { get; set; }
 
         public Cidade LocaldeNascimento {get;set;}
 
         [InverseProperty("Moradores")]
         public IList<Casa> Casas { get; set; }
+
+        public int idade {
+                        get{
+          int idade = DateTime.Now.Year - this.nascimento.Year;
+                if(DateTime.Now.Month >= this.nascimento.Month && DateTime.Now.Day >= this.nascimento) 
+                 {
+                    return idade;
+                               
+                      }                  
+                   return idade-1;
+
+                    }
+           
+            }
     }
 }

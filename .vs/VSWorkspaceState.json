@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ConsoleApp1",
-    "\\ConsoleApp1\\ExercicioCarro"
+    "\\Exemplos\\Adivinhador",
+    "\\Linq\\ProjetoORM_EF",
+    "\\SistemaAereo"
   ],
-  "SelectedNode": "\\ConsoleApp1\\ExercicioCarro\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

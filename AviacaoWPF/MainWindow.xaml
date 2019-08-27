@@ -1,0 +1,55 @@
+﻿<Window x:Class="AviacaoWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AviacaoWPF"
+        mc:Ignorable="d"
+        Title="Gerenciador de Voos" Height="600" Width="800">
+    <StackPanel>
+
+        <Menu Height="20">
+            <MenuItem>
+                
+            </MenuItem>
+            <MenuItem>
+
+            </MenuItem>
+            <MenuItem>
+
+            </MenuItem>
+        </Menu>
+
+        <TextBox Name="tbMultiLine" TextWrapping="Wrap" Grid.ColumnSpan="2" >Exemplo de textbox</TextBox>
+
+  
+            <ComboBoxItem  Content="{Binding ElementName=TxtCor, Path=Text}">
+            
+                
+                
+                
+        </ComboBoxItem>
+        <ComboBoxItem>
+ opcao2
+            </ComboBoxItem>
+               
+            <ComboBoxItem >
+                <StackPanel Orientation="Horizontal">
+                        <Image Source="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png"/>
+                        <TextBlock Foreground="Red">Red</TextBlock>
+                        
+                    </StackPanel>
+                  
+            
+            </ComboBoxItem>
+
+        <TextBox x:Name="TxtCor" Margin="10" Height="30" VerticalAlignment="Top" Background="{Binding RelativeSource={RelativeSource Self}, Path=Text }" />
+
+        <TextBox x:Name="Textbox3" Text="{Binding Path=TextoExemplo}"   Margin="10" Height="30" VerticalAlignment="Top"  />
+
+        <Button Click="Button_Click" Width="100">
+            
+        </Button>
+
+    </StackPanel>
+</Window>
