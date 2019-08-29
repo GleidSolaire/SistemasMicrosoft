@@ -36,10 +36,10 @@ namespace AviacaoWPF
             ModelAviacao context = new ModelAviacao();
             //  var pessoa = from p in context.Pessoas where p.Nome
 
-            var pessoa = context.Pessoas.First();
+            //var pessoa = context.Pessoas.First();
                          
             WindowPessoa wp = new WindowPessoa();
-            wp.Pessoa = Pessoa();
+           // wp.Pessoa = pessoa;
             wp.Show();
         }
     }

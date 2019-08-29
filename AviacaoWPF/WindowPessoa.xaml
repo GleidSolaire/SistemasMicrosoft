@@ -6,13 +6,34 @@
         xmlns:local="clr-namespace:AviacaoWPF"
         mc:Ignorable="d"
         Title="WindowPessoa" Height="450" Width="800">
-    <StackPanel Orientation="Vertical">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.ColumnSpan="2" ItemsSource="{Binding Path=PessoaViewModel.Pessoas  } " DisplayMemberPath="Nome
+                  " SelectedItem="{Binding Path=PessoasViewModel.PessoasSelecionada.Nome}">
+            
+        </ListView>
+
+        <TextBlock Grid.Row="1" Grid.Column="0">Id</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="0">Nome</TextBlock>
 
 
 
+        <TextBlock x:Name="id" Grid.Row="1" Grid.Column="1"  Text="{Binding Path=Pessoa.Id}"  />
+        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="NomePessoa"  Text="{ Binding Path=PessoaViewModel.PessoaSelecionda.Nome }" />
+        <Button Content="Ok" HorizontalAlignment="Center" Margin="10,10,10,10" Grid.Row="4" VerticalAlignment="Center" Width="75"  />
+        <Button Content="Cancelar" HorizontalAlignment="Center" Margin="174,10,147,10"  VerticalAlignment="Center" Width="75" Grid.Column="1" Grid.Row="4"/>
 
-        <TextBlock x:Name="id"   Text="{Binding Path=Pessoa.Id}"  /> 
-        <TextBox x:Name="NomePessoa"  Text="{ Binding Path=Pessoa.Nome}" />
-        
-    </StackPanel>
+
+
+    </Grid>
 </Window>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Aviacao
 {
-    public class Pessoa
+    public class pessoa
     {
         public int Id { get; set; }
 

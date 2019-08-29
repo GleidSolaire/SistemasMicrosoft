@@ -17,6 +17,6 @@ namespace Aviacao
 
         public int Coluna { get; set; }
 
-        public Pessoa Passageiro { get; set; }
+        public pessoa Passageiro { get; set; }
     }
 }

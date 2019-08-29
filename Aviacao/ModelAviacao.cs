@@ -20,7 +20,7 @@ namespace Aviacao
             modelBuilder.Entity<Voo>().HasRequired<Cidade>(V => V.Origem).WithMany(c => c.Partidas).WillCascadeOnDelete(false);
                 
         }
-        public virtual DbSet<Pessoa> Pessoas { get; set; }
+        public virtual DbSet<pessoa> Pessoas { get; set; }
     }
 
     //public class MyEntity

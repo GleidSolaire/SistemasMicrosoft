@@ -20,15 +20,12 @@ namespace AviacaoWPF
     /// </summary>
     public partial class WindowPessoa : Window
     {
-        public Pessoa Pessoa { get; set; }
+     public   Model.PessoaViewModel PessoaViewModel { get; set; }
         public WindowPessoa()
-        {
-
-            
-            
-
-
+        { 
             InitializeComponent();
+            this.PessoaViewModel = new Model.PessoaViewModel();
+            this.DataContext = this;
         }
     }
 }

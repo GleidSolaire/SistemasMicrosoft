@@ -11,7 +11,7 @@ namespace Aviacao
     public class Passagem
     {
         public int PassagemId { get; set; }
-        public Pessoa Passageiro { get; set; }
+        public pessoa Passageiro { get; set; }
 
         public IList<Voo> Trechos { get; set; }
 

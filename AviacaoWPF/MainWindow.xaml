@@ -47,7 +47,7 @@
 
         <TextBox x:Name="Textbox3" Text="{Binding Path=TextoExemplo}"   Margin="10" Height="30" VerticalAlignment="Top"  />
 
-        <Button Click="Button_Click" Width="100">
+        <Button Content="Teste" Click="Button_Click" Width="100" Height="32" Margin="346,0">
             
         </Button>
 
