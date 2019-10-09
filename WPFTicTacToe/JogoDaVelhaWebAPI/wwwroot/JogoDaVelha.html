@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da velha</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 60px;
+        }
+
+        div.tabuleiro {
+            margin: 0 auto 30px auto;
+            width: 600px;
+        }
+
+        div.row {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        div.square {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+
+            div.square:hover {
+                cursor: pointer;
+                background-color: #737373;
+            }
+
+        div.row:nth-child(1) div.square {
+            border-top: none;
+        }
+
+            div.row:nth-child(1) div.square:nth-child(1) {
+                border-left: none;
+            }
+
+            div.row:nth-child(1) div.square:nth-child(3) {
+                border-right: none;
+            }
+
+        div.row:nth-child(2) div.square:nth-child(1) {
+            border-left: none;
+        }
+
+        div.row:nth-child(2) div.square:nth-child(3) {
+            border-right: none;
+        }
+
+        div.row:nth-child(3) div.square {
+            border-bottom: none;
+        }
+
+            div.row:nth-child(3) div.square:nth-child(1) {
+                border-left: none;
+            }
+
+            div.row:nth-child(3) div.square:nth-child(3) {
+                border-right: none;
+            }
+
+        div.quadrado:active {
+            background-color: #FF8F4E;
+            color: white;
+        }
+
+        div.p00 {
+            top: 5px;
+            left: 5px;
+        }
+
+        div.p01 {
+            top: 5px;
+            left: 105px;
+        }
+
+        div.p02 {
+            top: 5px;
+            left: 205px;
+        }
+
+        div.p10 {
+            top: 105px;
+            left: 5px;
+        }
+
+        div.p11 {
+            top: 105px;
+            left: 105px;
+        }
+
+        div.p12 {
+            top: 105px;
+            left: 205px;
+        }
+
+        div.p20 {
+            top: 205px;
+            left: 5px;
+        }
+
+        div.p21 {
+            top: 205px;
+            left: 105px;
+        }
+
+        div.p22 {
+            top: 205px;
+            left: 205px;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="card">
+        <div class="card-body">
+            <h3>Jogo da Velha</h3> 
+        </div>
+        <button class="btn btn-primary" onclick="IniciarJogo()">Iniciar Jogo</button>
+    </div>
+    
+    <br/>
+    <div class="tabuleiro">
+        <div class="row">
+            <div class="square" id="00" onclick="Jogar(0,0)"></div>
+            <div class="square" id="01" onclick="Jogar(0,1)"></div>
+            <div class="square" id="02" onclick="Jogar(0,2)"></div>
+        </div>
+        <div class="row">
+            <div class="square"  id="10" onclick="Jogar(1,0)"></div>
+            <div class="square"  id="11" onclick="Jogar(1,1)"></div>
+            <div class="square"  id="12" onclick="Jogar(1,2)"></div>
+        </div>                   
+        <div class="row">        
+            <div class="square"  id="20" onclick="Jogar(2,0)"></div>
+            <div class="square"  id="21" onclick="Jogar(2,1)"></div>
+            <div class="square"  id="22" onclick="Jogar(2,2)"></div>
+        </div>
+    </div>
+    <script>
+    var Tabuleiro;
+    function Jogar(posX, posY) {
+    var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          ObterJogo();
+        }
+    };
+        xhttp.open("GET",
+            "/api/JogoDaVelha/" + Tabuleiro.jogadorAtual + "/" + posX + "/" + posY, true);
+    xhttp.send();
+        }
+
+
+        function IniciarJogo() {
+            var xhttp = new XMLHttpRequest();          
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert("Jogo Reiniciado!");
+                    ObterJogo();
+                }
+            };
+            xhttp.open("GET",
+                "/api/JogoDaVelha/Reset", true);
+            xhttp.send();
+        }
+
+        function ObterJogo() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.responseType = 'json';
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    Tabuleiro = this.response;
+                }
+            };
+            xhttp.open("GET",
+                "/api/JogoDaVelha/", true);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
