@@ -72,113 +72,188 @@
             color: white;
         }
 
-        div.p00 {
-            top: 5px;
-            left: 5px;
+        div.Jogador2 {
+            color: red;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 180px;
+            font-weight: bold;
         }
 
-        div.p01 {
-            top: 5px;
-            left: 105px;
+            div.Jogador2::after {
+                content: "X";
+            }
+
+        div.Jogador1 {
+            border: 20px solid green;
+            border-radius: 50%;
+            height: 60%;
+            width: 60%;
+            margin: 10%;
+        }
+      
+        div.DisplayJogador {
+            font-size: 1em;
+            display: inline;
         }
 
-        div.p02 {
-            top: 5px;
-            left: 205px;
+        div.DisplayJogadorAtual {
+            background: black;
+            color: white;
+            
         }
 
-        div.p10 {
-            top: 105px;
-            left: 5px;
-        }
-
-        div.p11 {
-            top: 105px;
-            left: 105px;
-        }
-
-        div.p12 {
-            top: 105px;
-            left: 205px;
-        }
-
-        div.p20 {
-            top: 205px;
-            left: 5px;
-        }
-
-        div.p21 {
-            top: 205px;
-            left: 105px;
-        }
-
-        div.p22 {
-            top: 205px;
-            left: 205px;
-        }
     </style>
 </head>
 <body>
-   
-    <div class="card">
+
+    <div class="card mt-2">
         <div class="card-body">
-            <h3>Jogo da Velha</h3> 
+            <h3>Jogo da Velha</h3>
         </div>
-        <button class="btn btn-primary" onclick="IniciarJogo()">Iniciar Jogo</button>
-    </div>
+        </div>
     
-    <br/>
-    <div class="tabuleiro">
-        <div class="row">
-            <div class="square" id="00" onclick="Jogar(0,0)"></div>
-            <div class="square" id="01" onclick="Jogar(0,1)"></div>
-            <div class="square" id="02" onclick="Jogar(0,2)"></div>
+        <div class="mt-3" >
+            <div id="dpJogador1" class="DisplayJogador">Jogador 1</div> | <div id="dpJogador2" class="DisplayJogador">Jogador 2</div>
         </div>
-        <div class="row">
-            <div class="square"  id="10" onclick="Jogar(1,0)"></div>
-            <div class="square"  id="11" onclick="Jogar(1,1)"></div>
-            <div class="square"  id="12" onclick="Jogar(1,2)"></div>
-        </div>                   
-        <div class="row">        
-            <div class="square"  id="20" onclick="Jogar(2,0)"></div>
-            <div class="square"  id="21" onclick="Jogar(2,1)"></div>
-            <div class="square"  id="22" onclick="Jogar(2,2)"></div>
+
+        <div class="tabuleiro mt-5">
+            <div class="row">
+                <div class="square" id="s00" onclick="Jogar(0,0)">
+                    <div id="Conteudo"></div>
+                </div>
+                <div class="square" id="s01" onclick="Jogar(0,1)">
+                    <div id="Conteudo"></div>
+                </div>
+                <div class="square" id="s02" onclick="Jogar(0,2)">
+                    <div id="Conteudo"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="square" id="s10" onclick="Jogar(1,0)">
+                    <div id="Conteudo" class="Jogador1"></div>
+                </div>
+                <div class="square" id="s11" onclick="Jogar(1,1)">
+                    <div id="Conteudo" class="Jogador1"></div>
+                </div>
+                <div class="square" id="s12" onclick="Jogar(1,2)">
+                    <div id="Conteudo" class="Jogador2"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="square" id="s20" onclick="Jogar(2,0)">
+                    <div id="Conteudo"></div>
+                </div>
+                <div class="square" id="s21" onclick="Jogar(2,1)">
+                    <div id="Conteudo"></div>
+                </div>
+                <div class="square" id="s22" onclick="Jogar(2,2)">
+                    <div id="Conteudo"></div>
+                </div>
+            </div>
         </div>
-    </div>
+    
+    <button class="btn btn-primary" onclick="IniciarJogo()">Iniciar Jogo</button>
+        
     <script>
-    var Tabuleiro;
-    function Jogar(posX, posY) {
-    var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-          ObterJogo();
-        }
-    };
-        xhttp.open("GET",
-            "/api/JogoDaVelha/" + Tabuleiro.jogadorAtual + "/" + posX + "/" + posY, true);
-    xhttp.send();
-        }
+        var Tabuleiro;
+        function Jogar(posX, posY) {
 
+           
 
+          
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    ObterJogo();
+                }
+            };
+
+            //if (Tabuleiro.ganhador != 0) {
+            //    alert("Reinicie o Jogo!");
+            //    ObterJogo();
+
+                if (Tabuleiro.ganhador == 1) {
+                   alert("Jogador 1 ganhou!");
+                   IniciarJogo();
+                }
+
+                else if (Tabuleiro.ganhador == 2) {
+                    alert("Jogador 2 ganhou!");
+                    IniciarJogo();
+                } else if (Tabuleiro.ganhador == -1) {
+                    alert("Empate!")
+                    IniciarJogo();
+                }
+
+            //}
+
+            xhttp.open("GET",
+                "/api/JogoDaVelha/" + Tabuleiro.jogadorAtual + "/" + posX + "/" + posY, true);
+            xhttp.send();
+        }
         function IniciarJogo() {
-            var xhttp = new XMLHttpRequest();          
+            var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     alert("Jogo Reiniciado!");
                     ObterJogo();
                 }
             };
+
+
+
             xhttp.open("GET",
                 "/api/JogoDaVelha/Reset", true);
             xhttp.send();
         }
-
         function ObterJogo() {
             var xhttp = new XMLHttpRequest();
             xhttp.responseType = 'json';
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     Tabuleiro = this.response;
+
+                    if (Tabuleiro.jogadorAtual == 1) {
+                        document.querySelector("#dpJogador2").classList.remove("DisplayJogadorAtual");
+                        document.querySelector("#dpJogador1").classList.toggle("DisplayJogadorAtual");
+                       
+                    }
+                    if (Tabuleiro.jogadorAtual == 2) {
+                        document.querySelector("#dpJogador1").classList.remove("DisplayJogadorAtual");
+                        document.querySelector("#dpJogador2").classList.toggle("DisplayJogadorAtual");
+                      
+                    }
+                    for (var v = 0; v < 3; v++) {
+                        for (var h = 0; h < 3; h++) {
+                            var conteudo = document.querySelector("#s" + h + v).querySelector("#Conteudo");
+                            switch (Tabuleiro.tabuleiro[v][h]) {
+                                case 0:
+                                    if (conteudo.classList.contains("Jogador1")) {
+                                        conteudo.classList.remove("Jogador1");
+                                    }
+                                    if (conteudo.classList.contains("Jogador2")) {
+                                        conteudo.classList.remove("Jogador2");
+                                    }
+                                    break;
+                                case 1:
+                                    if (conteudo.classList.contains("Jogador2")) {
+                                        conteudo.classList.remove("Jogador2");
+                                    }
+                                    if (!conteudo.classList.contains("Jogador1")) {
+                                        conteudo.classList.toggle("Jogador1");
+                                    }
+                                    break;
+                                case 2:
+                                    if (conteudo.classList.contains("Jogador1")) {
+                                        conteudo.classList.remove("Jogador1");
+                                    }
+                                    if (!conteudo.classList.contains("Jogador2")) {
+                                        conteudo.classList.toggle("Jogador2");
+                                    }
+                                    break;
+                            }
+                        }
+                    }
                 }
             };
             xhttp.open("GET",

@@ -34,7 +34,27 @@ namespace JogoDaVelhaWebAPI.Controllers
         public String Jogar(int jogador, int posX, int posY)
         {
             Jogo.Jogar(jogador, posX, posY);
+
+            if (Jogo.Ganhador == 0 )
+            {
+                Random r = new Random();
+                    bool ocupado = true;
+
+                while(ocupado)
+                {
+                    int h = r.Next(3);
+                    int v = r.Next(3);
+
+                    if (Jogo.Tabuleiro[v][h] ==0)
+                    {
+                        Jogo.Jogar(Jogo.JogadorAtual, h, v);
+                        ocupado = false;
+
+                    }
+                }
+            }
             switch (Jogo.Ganhador)
+
             {
                 case 0:
                     return "Jogo em andamento";
