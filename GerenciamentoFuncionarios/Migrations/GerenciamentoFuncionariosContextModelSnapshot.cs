@@ -28,7 +28,11 @@ namespace GerenciamentoFuncionarios.Migrations
                     b.Property<string>("Nome")
                         .IsRequired();
 
+                    b.Property<int>("ResponsavelId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ResponsavelId");
 
                     b.ToTable("Departamento");
                 });
@@ -40,13 +44,13 @@ namespace GerenciamentoFuncionarios.Migrations
 
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<int?>("LotaocaoId");
+                    b.Property<int?>("LotacaoId");
 
                     b.Property<string>("Nome");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LotaocaoId");
+                    b.HasIndex("LotacaoId");
 
                     b.ToTable("Funcionario");
                 });
@@ -61,7 +65,7 @@ namespace GerenciamentoFuncionarios.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired();
 
-                    b.Property<int>("ExecutorId");
+                    b.Property<int?>("ExecutorId");
 
                     b.Property<DateTime?>("Fim");
 
@@ -79,11 +83,19 @@ namespace GerenciamentoFuncionarios.Migrations
                     b.ToTable("Tarefa");
                 });
 
+            modelBuilder.Entity("GerenciamentoFuncionarios.Models.Departamento", b =>
+                {
+                    b.HasOne("GerenciamentoFuncionarios.Models.Funcionario", "Responsavel")
+                        .WithMany()
+                        .HasForeignKey("ResponsavelId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("GerenciamentoFuncionarios.Models.Funcionario", b =>
                 {
-                    b.HasOne("GerenciamentoFuncionarios.Models.Departamento", "Lotaocao")
+                    b.HasOne("GerenciamentoFuncionarios.Models.Departamento", "Lotacao")
                         .WithMany("Funcionarios")
-                        .HasForeignKey("LotaocaoId");
+                        .HasForeignKey("LotacaoId");
                 });
 
             modelBuilder.Entity("GerenciamentoFuncionarios.Models.Tarefa", b =>
@@ -94,8 +106,7 @@ namespace GerenciamentoFuncionarios.Migrations
 
                     b.HasOne("GerenciamentoFuncionarios.Models.Funcionario", "Executor")
                         .WithMany()
-                        .HasForeignKey("ExecutorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ExecutorId");
                 });
 #pragma warning restore 612, 618
         }

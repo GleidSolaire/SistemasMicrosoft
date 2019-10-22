@@ -15,6 +15,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Nome)
                 </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Responsavel)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -23,6 +26,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsavel.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

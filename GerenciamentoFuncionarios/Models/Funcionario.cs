@@ -7,6 +7,6 @@ namespace GerenciamentoFuncionarios.Models
 {
     public class Funcionario: Pessoa
     {
-        public Departamento Lotaocao { get; set; }
+        public Departamento Lotacao { get; set; }
     }
 }

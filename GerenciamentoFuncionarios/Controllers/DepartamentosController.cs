@@ -18,13 +18,14 @@ namespace GerenciamentoFuncionarios.Controllers
             _context = context;
         }
 
-        // GET: Departamentoes
+        // GET: Departamentos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departamento.ToListAsync());
+            var gerenciamentoFuncionariosContext = _context.Departamento.Include(d => d.Responsavel);
+            return View(await gerenciamentoFuncionariosContext.ToListAsync());
         }
 
-        // GET: Departamentoes/Details/5
+        // GET: Departamentos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,6 +34,7 @@ namespace GerenciamentoFuncionarios.Controllers
             }
 
             var departamento = await _context.Departamento
+                .Include(d => d.Responsavel)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (departamento == null)
             {
@@ -42,29 +44,39 @@ namespace GerenciamentoFuncionarios.Controllers
             return View(departamento);
         }
 
-        // GET: Departamentoes/Create
+        // GET: Departamentos/Create
         public IActionResult Create()
         {
+            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario, "Id", "Nome");
             return View();
         }
 
-        // POST: Departamentoes/Create
+        // POST: Departamentos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Id,Nome,ResponsavelId")] Departamento departamento)
         {
+            departamento.Responsavel = _context.Funcionario.Find(departamento.ResponsavelId);
             if (ModelState.IsValid)
             {
+                
+                  
+                if (departamento.Responsavel.Lotacao==null)
+                {
+                    departamento.Funcionarios.Add(departamento.Responsavel);
+                }
+
                 _context.Add(departamento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario, "Id", "Nome", departamento.ResponsavelId);
             return View(departamento);
         }
 
-        // GET: Departamentoes/Edit/5
+        // GET: Departamentos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,15 +89,16 @@ namespace GerenciamentoFuncionarios.Controllers
             {
                 return NotFound();
             }
+            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario, "Id", "Nome", departamento.ResponsavelId);
             return View(departamento);
         }
 
-        // POST: Departamentoes/Edit/5
+        // POST: Departamentos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,ResponsavelId")] Departamento departamento)
         {
             if (id != departamento.Id)
             {
@@ -112,10 +125,11 @@ namespace GerenciamentoFuncionarios.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario, "Id", "Id", departamento.ResponsavelId);
             return View(departamento);
         }
 
-        // GET: Departamentoes/Delete/5
+        // GET: Departamentos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,6 +138,7 @@ namespace GerenciamentoFuncionarios.Controllers
             }
 
             var departamento = await _context.Departamento
+                .Include(d => d.Responsavel)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (departamento == null)
             {
@@ -133,7 +148,7 @@ namespace GerenciamentoFuncionarios.Controllers
             return View(departamento);
         }
 
-        // POST: Departamentoes/Delete/5
+        // POST: Departamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

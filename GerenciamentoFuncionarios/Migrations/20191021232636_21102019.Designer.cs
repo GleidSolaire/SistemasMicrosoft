@@ -11,8 +11,8 @@ using System;
 namespace GerenciamentoFuncionarios.Migrations
 {
     [DbContext(typeof(GerenciamentoFuncionariosContext))]
-    [Migration("20191016234400_v2.2")]
-    partial class v22
+    [Migration("20191021232636_21102019")]
+    partial class _21102019
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,11 +29,11 @@ namespace GerenciamentoFuncionarios.Migrations
                     b.Property<string>("Nome")
                         .IsRequired();
 
-                    b.Property<int?>("TarefaId");
+                    b.Property<int>("ResponsavelId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TarefaId");
+                    b.HasIndex("ResponsavelId");
 
                     b.ToTable("Departamento");
                 });
@@ -45,17 +45,13 @@ namespace GerenciamentoFuncionarios.Migrations
 
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<int?>("LotaocaoId");
+                    b.Property<int?>("LotacaoId");
 
                     b.Property<string>("Nome");
 
-                    b.Property<int?>("TarefaId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("LotaocaoId");
-
-                    b.HasIndex("TarefaId");
+                    b.HasIndex("LotacaoId");
 
                     b.ToTable("Funcionario");
                 });
@@ -65,10 +61,14 @@ namespace GerenciamentoFuncionarios.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("DepartamentosId");
+
                     b.Property<string>("Descricao")
                         .IsRequired();
 
-                    b.Property<DateTime>("Fim");
+                    b.Property<int?>("ExecutorId");
+
+                    b.Property<DateTime?>("Fim");
 
                     b.Property<DateTime>("Inicio");
 
@@ -77,25 +77,37 @@ namespace GerenciamentoFuncionarios.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartamentosId");
+
+                    b.HasIndex("ExecutorId");
+
                     b.ToTable("Tarefa");
                 });
 
             modelBuilder.Entity("GerenciamentoFuncionarios.Models.Departamento", b =>
                 {
-                    b.HasOne("GerenciamentoFuncionarios.Models.Tarefa")
-                        .WithMany("Departamentos")
-                        .HasForeignKey("TarefaId");
+                    b.HasOne("GerenciamentoFuncionarios.Models.Funcionario", "Responsavel")
+                        .WithMany()
+                        .HasForeignKey("ResponsavelId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("GerenciamentoFuncionarios.Models.Funcionario", b =>
                 {
-                    b.HasOne("GerenciamentoFuncionarios.Models.Departamento", "Lotaocao")
+                    b.HasOne("GerenciamentoFuncionarios.Models.Departamento", "Lotacao")
                         .WithMany("Funcionarios")
-                        .HasForeignKey("LotaocaoId");
+                        .HasForeignKey("LotacaoId");
+                });
 
-                    b.HasOne("GerenciamentoFuncionarios.Models.Tarefa")
-                        .WithMany("Funcionarios")
-                        .HasForeignKey("TarefaId");
+            modelBuilder.Entity("GerenciamentoFuncionarios.Models.Tarefa", b =>
+                {
+                    b.HasOne("GerenciamentoFuncionarios.Models.Departamento", "Departamentos")
+                        .WithMany()
+                        .HasForeignKey("DepartamentosId");
+
+                    b.HasOne("GerenciamentoFuncionarios.Models.Funcionario", "Executor")
+                        .WithMany()
+                        .HasForeignKey("ExecutorId");
                 });
 #pragma warning restore 612, 618
         }
