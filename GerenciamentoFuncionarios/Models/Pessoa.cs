@@ -14,5 +14,8 @@ namespace GerenciamentoFuncionarios.Models
      public  String Nome { get; set; }
 
      public   DateTime DataNascimento { get; set; }
+
     }
+
+   
 }

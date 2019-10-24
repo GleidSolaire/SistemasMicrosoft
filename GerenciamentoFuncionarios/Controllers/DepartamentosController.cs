@@ -46,8 +46,13 @@ namespace GerenciamentoFuncionarios.Controllers
 
         // GET: Departamentos/Create
         public IActionResult Create()
+
+         
+
         {
-            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario, "Id", "Nome");
+
+
+            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario.Where(f => f.Lotacao == null), "Id", "Nome");
             return View();
         }
 
@@ -59,6 +64,9 @@ namespace GerenciamentoFuncionarios.Controllers
         public async Task<IActionResult> Create([Bind("Id,Nome,ResponsavelId")] Departamento departamento)
         {
             departamento.Responsavel = _context.Funcionario.Find(departamento.ResponsavelId);
+
+            ModelState.Clear();
+            TryValidateModel(departamento);
             if (ModelState.IsValid)
             {
                 
@@ -125,7 +133,7 @@ namespace GerenciamentoFuncionarios.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario, "Id", "Id", departamento.ResponsavelId);
+            ViewData["ResponsavelId"] = new SelectList(_context.Funcionario, "Id", "Nome", departamento.ResponsavelId);
             return View(departamento);
         }
 
