@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ExercicioRotas\\ExercicioRotas",
+    "\\ExercicioRotas\\ExercicioRotas\\Controllers",
+    "\\GerenciamentoFuncionarios"
   ],
+  "SelectedNode": "\\ExercicioRotas",
   "PreviewInSolutionExplorer": false
 }

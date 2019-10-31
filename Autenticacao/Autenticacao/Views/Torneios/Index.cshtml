@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Autenticacao.Models.Torneio>
+@using Microsoft.AspNetCore.Identity
+@using Autenticacao.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeTorneio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantidadeJogadores)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inicio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeTorneio)
+                </td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.Dono)
+                    {
+                        @Html.DisplayFor(modelItem => item.QuantidadeJogadores)
+                    }
+                    else
+                    {
+                        <span>**</span>
+                    }
+
+                    </td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.Dono)
+                    {
+                        @Html.DisplayFor(modelItem => item.Inicio)
+                    }
+                    else
+                    {
+                        <span>**</span>
+                    }
+
+                </td>
+                <td>
+
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                      <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> } <span>|</span>
+
+
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> <span>|</span>
+                    @if (SignInManager.IsSignedIn(User))
+                    {<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>}
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
