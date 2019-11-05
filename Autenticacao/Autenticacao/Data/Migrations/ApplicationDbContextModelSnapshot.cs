@@ -76,11 +76,14 @@ namespace Autenticacao.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Dono");
+                    b.Property<string>("Dono")
+                        .IsRequired();
 
                     b.Property<DateTime>("Inicio");
 
                     b.Property<string>("NomeTorneio");
+
+                    b.Property<decimal>("Premiacao");
 
                     b.Property<int>("QuantidadeJogadores");
 

@@ -58,7 +58,7 @@ namespace Autenticacao.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeTorneio,QuantidadeJogadores,Inicio")] Torneio torneio)
+        public async Task<IActionResult> Create([Bind("Id,NomeTorneio,QuantidadeJogadores,Inicio, Premiacao")] Torneio torneio)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Autenticacao.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeTorneio,QuantidadeJogadores,Inicio")] Torneio torneio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeTorneio,QuantidadeJogadores,Inicio, Premiacao")] Torneio torneio)
         {
             if (id != torneio.Id)
             {

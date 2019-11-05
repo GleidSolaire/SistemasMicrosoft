@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ExercicioRotas\\ExercicioRotas",
-    "\\ExercicioRotas\\ExercicioRotas\\Controllers",
+    "\\AviacaoWPF",
     "\\GerenciamentoFuncionarios"
   ],
-  "SelectedNode": "\\ExercicioRotas",
+  "SelectedNode": "\\AviacaoWPF\\WindowPessoa.xaml",
   "PreviewInSolutionExplorer": false
 }
