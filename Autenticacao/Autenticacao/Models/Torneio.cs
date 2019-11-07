@@ -8,6 +8,9 @@ namespace Autenticacao.Models
 {
     public class Torneio
     {
+        public IList<Jogador> Jogadores { get; set; }
+
+        public IList<Jogo> Jogos { get; set; }
         public int Id { get; set; }
         [Display (Name ="Nome do Torneio")]
         public string NomeTorneio { get; set; }
